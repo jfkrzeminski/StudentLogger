@@ -57,9 +57,9 @@ def main():
         student_states[custom_code] = action
 
         if action == "out":
-            print(f" >  {student_name} (ID={custom_code}) left for the bathroom.")
+            print(f" >  {student_name} (ID={custom_code}) left at {datetime.datetime.now().strftime('%H:%M:%S')}")
         else:
-            print(f" >  {student_name} (ID={custom_code}) returned. {datetime.datetime.now() - student_timeout[custom_code]} elapsed")
+            print(f" >  {student_name} (ID={custom_code}) returned at {datetime.datetime.now().strftime('%H:%M:%S')}. {str(datetime.datetime.now() - student_timeout[custom_code]).split('.')[0]} elapsed")
 
 
 if __name__ == "__main__":
