@@ -1,5 +1,6 @@
 import csv
 import datetime
+import json
 import os
 
 # Get today's date to create a log file for the day
@@ -14,6 +15,7 @@ if not os.path.exists(log_file):
 
 # Dictionary to track the state of each student code (in or out)
 student_states = {}
+student_timeout = {}
 
 
 def log_time(custom_code, action):
@@ -21,17 +23,26 @@ def log_time(custom_code, action):
     with open(log_file, mode='a', newline='') as file:
         writer = csv.writer(file)
         writer.writerow([custom_code, action, now])
+    if action == "out":
+        student_timeout[custom_code] = now
 
 
 def main():
     print("Welcome to the Student Logging Program!")
     print("Enter custom numeric codes to log student actions.")
-    print("Type 'quit' to exit the program.")
+    print("Type 'q' or 'quit' to exit the program.")
+
+    with open("people.json", "r") as fd:
+        student_ids = json.load(fd)
 
     while True:
-        custom_code = input("Enter custom numeric code: ").strip()
+        custom_code = input("Enter code: ").strip()
+        if custom_code in student_ids:
+            student_name = student_ids[custom_code]
+        else:
+            student_name = "NEW STUDENT"
 
-        if custom_code.lower() == 'quit':
+        if custom_code.lower() == 'quit' or custom_code.lower() == 'q':
             print("Exiting the program.")
             break
 
@@ -45,7 +56,10 @@ def main():
         log_time(custom_code, action)
         student_states[custom_code] = action
 
-        print(f"Action '{action}' logged for custom code '{custom_code}'.")
+        if action == "out":
+            print(f" >  {student_name} (ID={custom_code}) left for the bathroom.")
+        else:
+            print(f" >  {student_name} (ID={custom_code}) returned. {datetime.datetime.now() - student_timeout[custom_code]} elapsed")
 
 
 if __name__ == "__main__":
