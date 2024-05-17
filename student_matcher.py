@@ -30,7 +30,10 @@ def match_custom_codes_with_names(student_mappings):
         if custom_code in student_ids:
             student_name = student_ids[custom_code]
         else:
-            raise Exception(f"Id {custom_code} not in people.json")
+            student_name = input(f"No recorded student with id {custom_code}. Enter student name: ").strip()
+            student_ids[str(custom_code)] = student_name
+            with open("people.json", 'w') as fd:
+                json.dump(fd, student_ids)
         if student_name in student_names:
             student_names[student_name].extend(actions)
         else:
