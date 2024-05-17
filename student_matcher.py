@@ -33,7 +33,7 @@ def match_custom_codes_with_names(student_mappings):
             student_name = input(f"No recorded student with id {custom_code}. Enter student name: ").strip()
             student_ids[str(custom_code)] = student_name
             with open("people.json", 'w') as fd:
-                json.dump(fd, student_ids)
+                json.dump(student_ids, fd)
         if student_name in student_names:
             student_names[student_name].extend(actions)
         else:
