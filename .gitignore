@@ -2,3 +2,5 @@ workspace.xml
 .idea
 *.csv
 people.json
+__pycache__
+tts_audio
