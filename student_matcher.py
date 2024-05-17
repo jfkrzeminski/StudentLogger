@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 today_date = datetime.now().strftime("%Y-%m-%d")
 log_file = f'student_log_{today_date}.csv'  # Make sure the filename matches the logging program's output
 
+
 def load_student_mappings():
     student_mappings = {}
     with open(log_file, mode='r') as file:
@@ -20,6 +21,7 @@ def load_student_mappings():
 
     return student_mappings
 
+
 def match_custom_codes_with_names(student_mappings):
     with open("people.json", 'r') as fd:
         student_ids = json.load(fd)
@@ -33,13 +35,14 @@ def match_custom_codes_with_names(student_mappings):
             student_name = input(f"No recorded student with id {custom_code}. Enter student name: ").strip()
             student_ids[str(custom_code)] = student_name
             with open("people.json", 'w') as fd:
-                json.dump(student_ids, fd)
+                json.dump(student_ids, fd, indent=4)
         if student_name in student_names:
             student_names[student_name].extend(actions)
         else:
             student_names[student_name] = actions
 
     return student_names
+
 
 def calculate_total_durations(student_names):
     student_durations = {}
@@ -62,6 +65,7 @@ def calculate_total_durations(student_names):
 
     return student_durations
 
+
 def save_to_csv(student_durations):
     output_file = f'student_durations_{today_date}.csv'
     with open(output_file, mode='w', newline='') as file:
@@ -72,15 +76,20 @@ def save_to_csv(student_durations):
             for entry_timestamp, exit_timestamp in data['timestamps']:
                 writer.writerow([student_name, entry_timestamp, exit_timestamp, total_duration])
 
+
 def print_student_details(student_durations):
     print("\nMatched Students with Entry/Exit Details and Total Duration:")
     for student_name, data in sorted(student_durations.items()):
         total_duration = data['total_duration']
         print(f"Student Name: {student_name}")
+        idx = 1
         for entry_timestamp, exit_timestamp in data['timestamps']:
-            print(f"  Time Out: {entry_timestamp}")
-            print(f"  Time In: {exit_timestamp}")
+            print(f"  Signout {idx}/{len(data['timestamps'])}:")
+            print(f"\tTime Out: {entry_timestamp}")
+            print(f"\tTime In: {exit_timestamp}")
+            idx += 1
         print(f"Total Duration: {total_duration}\n")
+
 
 def main():
     student_mappings = load_student_mappings()
@@ -88,7 +97,8 @@ def main():
     student_durations = calculate_total_durations(student_names)
     save_to_csv(student_durations)
     print_student_details(student_durations)
-    print(f"\nStudent durations saved to 'student_durations_{today_date}.csv'.")
+    print(f"Student signout durations saved to 'student_durations_{today_date}.csv'.")
+
 
 if __name__ == "__main__":
     main()

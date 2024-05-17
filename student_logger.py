@@ -2,6 +2,7 @@ import csv
 import datetime
 import json
 import os
+import student_matcher
 
 # Get today's date to create a log file for the day
 today_date = datetime.datetime.now().strftime("%Y-%m-%d")
@@ -60,8 +61,8 @@ def main():
             print(f" >  {student_name} (ID={custom_code}) left at {datetime.datetime.now().strftime('%H:%M:%S')}")
         else:
             print(f" >  {student_name} (ID={custom_code}) returned at {datetime.datetime.now().strftime('%H:%M:%S')}. {str(datetime.datetime.now() - student_timeout[custom_code]).split('.')[0]} elapsed")
+    student_matcher.main()
 
 
 if __name__ == "__main__":
     main()
-
