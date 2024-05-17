@@ -6,15 +6,13 @@ from pygame import mixer
 mixer.init()
 
 
-def get_tts(message):
+def get_tts(message, name):
     speech_file = gTTS(message)
-    filename = message[:20] if len(message) > 20 else message
-    speech_file.save(f"tts_audio/{filename}.mp3")
+    speech_file.save(f"tts_audio/{name}.mp3")
 
 
-def play_tts(message):
-    filename = message[:20] if len(message) > 20 else message
-    mixer.music.load(f"tts_audio/{filename}.mp3")
+def play_tts(name):
+    mixer.music.load(f"tts_audio/{name}.mp3")
     mixer.music.play()
 
 
