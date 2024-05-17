@@ -18,4 +18,4 @@ def play_tts(name):
 
 def get_timeout_message(td: datetime.timedelta, name: str):
     mins_gone = td.seconds // 60
-    return f"{name} returned from the bathroom after {mins_gone} minute{'s' if mins_gone != 1 else ''} and {td.seconds % 60} seconds."
+    return f"{name} returned after {mins_gone} minute{'s' if mins_gone != 1 else ''} and {td.seconds % 60} seconds."
