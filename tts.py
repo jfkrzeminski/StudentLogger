@@ -1,9 +1,11 @@
 import datetime
+# import pyttsx3
 from gtts import gTTS
 from pygame import mixer
 
 
 mixer.init()
+# engine = pyttsx3.init()
 
 
 def get_tts(message, name):
@@ -14,6 +16,11 @@ def get_tts(message, name):
 def play_tts(name):
     mixer.music.load(f"tts_audio/{name}.mp3")
     mixer.music.play()
+
+
+def get_and_play_tts(message):
+    engine.say(message)
+    engine.runAndWait()
 
 
 def get_timeout_message(td: datetime.timedelta, name: str):

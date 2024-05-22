@@ -67,6 +67,7 @@ def main():
             timeout_message = tts.get_timeout_message(time_d, student_name)
             tts.get_tts(timeout_message, student_name)
             tts.play_tts(student_name)
+            # tts.get_and_play_tts(timeout_message)
     student_matcher.main()
 
 
