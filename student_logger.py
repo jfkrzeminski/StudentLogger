@@ -3,7 +3,7 @@ import datetime
 import json
 import os
 import student_matcher
-import tts
+
 
 # Get today's date to create a log file for the day
 today_date = datetime.datetime.now().strftime("%Y-%m-%d")
@@ -64,10 +64,7 @@ def main():
             time_d = datetime.datetime.now() - student_timeout[custom_code]
             print(f" >  {student_name} (ID={custom_code}) returned at {datetime.datetime.now().strftime('%H:%M:%S')}.")
             print(f"    Time Elapsed:  {str(time_d).split('.')[0]}")
-            timeout_message = tts.get_timeout_message(time_d, student_name)
-            tts.get_tts(timeout_message, student_name)
-            tts.play_tts(student_name)
-            # tts.get_and_play_tts(timeout_message)
+
     student_matcher.main()
 
 
