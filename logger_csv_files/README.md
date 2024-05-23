@@ -1,0 +1,1 @@
+All student logs are written to this directory
