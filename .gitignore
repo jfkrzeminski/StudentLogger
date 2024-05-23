@@ -6,3 +6,4 @@ tts_audio
 __pycache__/
 *.py[cod]
 *.ds_store
+
