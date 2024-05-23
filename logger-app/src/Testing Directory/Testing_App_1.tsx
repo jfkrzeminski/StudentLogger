@@ -1,5 +1,6 @@
 import React from 'react';
 import MyButton from './Button_Test';
+import ButtonWithTimer from './ButtonTimer';
 
 //      ./ - means file in current directory
 //      .. - refers to a file one directory out
@@ -10,6 +11,7 @@ function NewTestApp(){
         <div>
             <h1>Welcome to the Button Show</h1>
             <MyButton />
+            <ButtonWithTimer />
         </div>
     );
 }
