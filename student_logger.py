@@ -7,7 +7,7 @@ import student_matcher
 
 # Get today's date to create a log file for the day
 today_date = datetime.datetime.now().strftime("%Y-%m-%d")
-log_file = f'student_log_{today_date}.csv'
+log_file = f'logger_csv_files/student_log_{today_date}.csv'
 
 # Initialize the CSV file with headers if it doesn't exist
 if not os.path.exists(log_file):
