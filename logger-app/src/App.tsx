@@ -6,7 +6,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <Card>Hello!</Card>
+      <h1>Log In</h1>
     </div>
   );
 }
