@@ -1,16 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Card } from 'react-bootstrap';
+import React, { useState } from 'react';
+import Header from './components/Header';
+import CheckInOut from './components/CheckInOut';
+import StudentList from './components/StudentList';
+import { Student } from './types';
 import './App.css';
-import NewTestApp from './Testing Directory/Testing_App_1';
 
+const App: React.FC = () => {
+  const [students, setStudents] = useState<Student[]>([]);
+  const studentNames = ["John Doe", "Jane Smith", "Alice Johnson", "Bob Brown"];
 
-function App() {
+  const addStudent = (student: Student) => {
+    setStudents([...students, student]);
+  };
+
   return (
     <div className="App">
-      <h1>Log In</h1>
-
-      <NewTestApp />
+      <Header />
+      <CheckInOut addStudent={addStudent} studentNames={studentNames} />
+      <StudentList students={students} />
     </div>
   );
 }
