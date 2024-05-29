@@ -1,4 +1,4 @@
-// src/components/StudentList.tsx
+// StudentList.tsx
 import React from 'react';
 import { Student } from '../types';
 
@@ -13,7 +13,12 @@ const StudentList: React.FC<StudentListProps> = ({ students }) => {
       <ul>
         {students.map((student, index) => (
           <li key={index}>
-            {student.name} - {student.status} {student.time && `at ${student.time}`}
+            <span>{student.name}</span>
+            {student.status === 'Checked In' ? (
+              <i className="fas fa-check-circle checked-in-icon" style={{ marginLeft: '10px' }} />
+            ) : (
+              <i className="fas fa-times-circle checked-out-icon" style={{ marginLeft: '10px' }} />
+            )}
           </li>
         ))}
       </ul>
@@ -22,3 +27,4 @@ const StudentList: React.FC<StudentListProps> = ({ students }) => {
 }
 
 export default StudentList;
+

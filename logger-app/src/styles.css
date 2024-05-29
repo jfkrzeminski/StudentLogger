@@ -1,0 +1,12 @@
+/* Example of importing Font Awesome CSS */
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+
+/* Check in/out colors */
+.checked-in-icon {
+    color: green;
+  }
+  
+  .checked-out-icon {
+    color: red;
+  }
+  
