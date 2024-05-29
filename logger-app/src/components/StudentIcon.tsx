@@ -1,5 +1,5 @@
 // src/components/StudentIcon.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Student } from '../types';
 
 interface StudentIconProps {
@@ -8,8 +8,24 @@ interface StudentIconProps {
 }
 
 const StudentIcon: React.FC<StudentIconProps> = ({ student, toggleStatus }) => {
+  const [isSelected, setIsSelected] = useState<boolean>(student.status === 'Checked In');
+
+  const handleToggleStatus = () => {
+    toggleStatus(student.id);
+    setIsSelected(prevSelected => !prevSelected);
+  };
+
   return (
-    <div onClick={() => toggleStatus(student.id)} style={{ cursor: 'pointer', padding: '10px', border: '1px solid black', margin: '5px', display: 'inline-block' }}>
+    <div
+      onClick={handleToggleStatus}
+      style={{
+        cursor: 'pointer',
+        padding: '10px',
+        border: '1px solid black',
+        margin: '5px',
+        backgroundColor: isSelected ? 'lightgreen' : 'lightcoral' // Change background color based on isSelected state
+      }}
+    >
       <p>{student.name}</p>
       <p>{student.status}</p>
     </div>

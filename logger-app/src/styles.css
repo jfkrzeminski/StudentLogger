@@ -10,3 +10,13 @@
     color: red;
   }
   
+
+  /* styles.css */
+.checked-in {
+    background-color: lightgreen;
+  }
+  
+  .checked-out {
+    background-color: lightcoral;
+  }
+  
