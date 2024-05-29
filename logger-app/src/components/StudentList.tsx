@@ -1,3 +1,4 @@
+// src/components/StudentList.tsx
 import React from 'react';
 import { Student } from '../types';
 
@@ -12,7 +13,7 @@ const StudentList: React.FC<StudentListProps> = ({ students }) => {
       <ul>
         {students.map((student, index) => (
           <li key={index}>
-            {student.name} - {student.status} at {student.time}
+            {student.name} - {student.status} {student.time && `at ${student.time}`}
           </li>
         ))}
       </ul>

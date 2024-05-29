@@ -8,14 +8,16 @@ interface CheckInOutProps {
 
 const CheckInOut: React.FC<CheckInOutProps> = ({ addStudent, studentNames }) => {
   const [name, setName] = useState<string>('');
-  const [status, setStatus] = useState<string>('');
+  const [status, setStatus] = useState<'Checked In' | 'Checked Out'>('Checked In');
 
   const handleCheckInOut = () => {
     if (name && status) {
-      const newStudent: Student = { name, status, time: new Date().toLocaleTimeString() };
+      // Generate a unique ID for the student
+      const id = Date.now();
+      const newStudent: Student = { id, name, status, time: new Date().toLocaleTimeString() };
       addStudent(newStudent);
       setName('');
-      setStatus('');
+      setStatus('Checked In'); // Reset to default value
     }
   };
 
@@ -30,14 +32,16 @@ const CheckInOut: React.FC<CheckInOutProps> = ({ addStudent, studentNames }) => 
           </option>
         ))}
       </select>
-      <select value={status} onChange={(e) => setStatus(e.target.value)}>
+      <select value={status} onChange={(e) => setStatus(e.target.value as 'Checked In' | 'Checked Out')}>
         <option value="">Select Status</option>
-        <option value="Check In">Check In</option>
-        <option value="Check Out">Check Out</option>
+        <option value="Checked In">Check In</option>
+        <option value="Checked Out">Check Out</option>
       </select>
       <button onClick={handleCheckInOut}>Submit</button>
     </div>
   );
-}
+};
 
 export default CheckInOut;
+
+

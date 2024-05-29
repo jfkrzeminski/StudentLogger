@@ -1,8 +1,9 @@
 // Create a type for the "Student" object
 
 export interface Student {
+    id: number;
     name: string;
-    status: string;
-    time: string;
+    status: 'Checked In' | 'Checked Out';
+    time?: string;
   }
   
