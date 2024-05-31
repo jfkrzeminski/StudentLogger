@@ -1,40 +1,56 @@
-// src/App.tsx
 import React, { useState } from 'react';
-import Header from './components/Header';
-import StudentIcon from './components/StudentIcon';
 import StudentList from './components/StudentList';
 import { Student } from './types';
-import './App.css';
+import initialStudents from './components/studentsData';
+import WaffleMenu from './components/WaffleMenu';
+import './styles.css';
 
 const App: React.FC = () => {
-  const [students, setStudents] = useState<Student[]>([
-    { id: 1, name: 'John Doe', status: 'Checked In' },
-    { id: 2, name: 'Jane Smith', status: 'Checked In' },
-    { id: 3, name: 'Alice Johnson', status: 'Checked In' },
-    { id: 4, name: 'Bob Brown', status: 'Checked In' }
-  ]);
+  const [students, setStudents] = useState<Student[]>(initialStudents);
+  const [log, setLog] = useState<string[]>([]);
+
+  const addLog = (entry: string) => {
+    setLog(prevLog => [...prevLog, entry]);
+  };
 
   const toggleStatus = (id: number) => {
-    setStudents(prevStudents =>
-      prevStudents.map(student =>
-        student.id === id
-          ? { ...student, status: student.status === 'Checked In' ? 'Checked Out' : 'Checked In', time: new Date().toLocaleTimeString() }
-          : student
-      )
-    );
+    setStudents(students.map(student => 
+      student.id === id ? { ...student, status: student.status === 'Checked In' ? 'Checked Out' : 'Checked In' } : student
+    ));
+    const student = students.find(student => student.id === id);
+    if (student) {
+      addLog(`${student.name} checked ${student.status === 'Checked In' ? 'Checked Out' : 'Checked In'} at ${new Date().toLocaleTimeString()}`);
+    }
+  };
+
+  const updateStudentImage = (id: number, imageUrl: string) => {
+    setStudents(students.map(student =>
+      student.id === id ? { ...student, imageUrl } : student
+    ));
+  };
+
+  const handleAddStudent = (name: string, status: string, imageUrl: string) => {
+    const id = Math.max(...students.map(student => student.id)) + 1;
+    const newStudent: Student = { id, name, status: status as 'Checked In' | 'Checked Out', time: new Date().toLocaleTimeString(), imageUrl };
+    setStudents([...students, newStudent]);
   };
 
   return (
     <div className="App">
-      <Header />
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {students.map(student => (
-          <StudentIcon key={student.id} student={student} toggleStatus={toggleStatus} />
-        ))}
+      <WaffleMenu onAddStudent={handleAddStudent} />
+      <h1>Student Check-In/Out</h1>
+      <StudentList students={students} toggleStatus={toggleStatus} updateStudentImage={updateStudentImage} />
+      <div>
+        <h2>Activity Log</h2>
+        <ul>
+        {log.map((entry, index) => (
+            <li key={index}>{entry}</li>
+          ))}
+        </ul>
       </div>
-      <StudentList students={students} />
     </div>
   );
 };
 
 export default App;
+         

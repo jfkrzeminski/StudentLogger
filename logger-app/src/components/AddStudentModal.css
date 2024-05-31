@@ -1,0 +1,65 @@
+/* AddStudentModal.css */
+.modal-background {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centers the modal background*/
+    width: 80%;
+    height: 80%;
+    background-color: rgba(130, 130, 130, 0.458);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.modal {
+    position: absolute; /* or position: fixed; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 10000; /* Adjust the value as needed */
+}
+  
+  
+  .modal h2 {
+    margin-top: 0;
+  }
+  
+  .modal label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .modal input,
+  .modal select {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .button-group button {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .button-group button:first-child {
+    background-color: #007bff;
+    color: white;
+    border: none;
+  }
+  
+  .button-group button:last-child {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+  }
+  

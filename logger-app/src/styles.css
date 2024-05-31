@@ -14,9 +14,80 @@
   /* styles.css */
 .checked-in {
     background-color: lightgreen;
+    color: black; /* Text Color when checked in */
   }
   
   .checked-out {
     background-color: lightcoral;
+    color: white; /* Text Color when checked out */
+  }
+  
+  .rounded-icon {
+    border-radius: 50%;
+    padding: 5px;
+    background-color: lightgreen; 
+  }
+
+
+  .student-icon {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Makes the corners rounded */
+    margin: 5px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    color: white; /* Text color */
+  }
+
+
+  .student-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 150px;
+    height: 70px;
+    border-radius: 10px; /* Slightly rounded corners */
+    margin: 10px;
+    padding: 5px;
+    cursor: pointer;
+    /*color: white;*/ /* Text color -- Currently commented out as the text color changes with the checked in/out status ** See Above ** */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+  }
+  
+  .student-box img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Makes the image circular */
+    margin-right: 10px;
+  }
+
+  .image-upload-label {
+    cursor: pointer;
+    color: white;
+    font-size: 1.5em;
+    margin-left: auto;
+    margin-right: 5px;
+  }
+
+  .waffle-menu {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000; /* Ensure it's on top of other content */
+  }
+  
+  .waffle-menu button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+    padding: 5px;
+  }
+  
+  .waffle-menu button:hover {
+    color: #555;
   }
   
