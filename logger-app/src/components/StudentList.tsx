@@ -1,6 +1,6 @@
 import React from 'react';
 import { Student } from '../types';
-import '../styles.css'; // Import the CSS file
+import './StudentList.css';
 
 interface StudentListProps {
   students: Student[];
@@ -14,39 +14,36 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        updateStudentImage(id, reader.result as string);
+        if (typeof reader.result === 'string') {
+          updateStudentImage(id, reader.result);
+        }
       };
       reader.readAsDataURL(file);
     }
   };
 
   return (
-    <div>
-      <h2>Student List</h2>
-      <ul style={{ listStyleType: 'none', padding: 0, display: 'flex', flexWrap: 'wrap' }}>
-        {students.map((student, index) => (
-          <li key={index}>
-            <div
-              className={`student-box ${student.status === 'Checked In' ? 'checked-in' : 'checked-out'}`}
-              onClick={() => toggleStatus(student.id)}
-            >
-              <img src={student.imageUrl} alt={student.name} className="student-image" />
-              <span>{student.name}</span>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => handleImageChange(student.id, e)}
-                style={{ display: 'none' }} // Hide the input
-                id={`file-input-${student.id}`}
-              />
-              <label htmlFor={`file-input-${student.id}`} className="image-upload-label">
-                &#x1F4F7; {/* Camera emoji as an upload icon */}
-              </label>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className="student-list">
+      {students.map(student => (
+        <li key={student.id} className="student-item">
+          <div className={`student-box ${student.status === 'Checked In' ? 'checked-in' : 'checked-out'}`}>
+            <img src={student.imageUrl} alt={student.name} className="student-image" />
+            <span>{student.name}</span>
+            <button onClick={() => toggleStatus(student.id)}>
+              {student.status === 'Checked In' ? 'Check Out' : 'Check In'}
+            </button>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(event) => handleImageChange(student.id, event)}
+              style={{ display: 'none' }}
+              id={`file-input-${student.id}`}
+            />
+            <label htmlFor={`file-input-${student.id}`} className="image-upload-label">📷</label>
+          </div>
+        </li>
+      ))}
+    </ul>
   );
 };
 

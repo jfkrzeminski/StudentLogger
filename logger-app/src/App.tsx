@@ -1,56 +1,63 @@
 import React, { useState } from 'react';
+import WaffleMenu from './components/WaffleMenu';
 import StudentList from './components/StudentList';
 import { Student } from './types';
-import initialStudents from './components/studentsData';
-import WaffleMenu from './components/WaffleMenu';
-import './styles.css';
+import './App.css';
+
+const initialStudents: Student[] = [
+  { id: 1, name: 'Student 1', status: 'Checked Out', imageUrl: 'https://via.placeholder.com/40', time: '' },
+  { id: 2, name: 'Student 2', status: 'Checked Out', imageUrl: 'https://via.placeholder.com/40', time: '' },
+];
 
 const App: React.FC = () => {
   const [students, setStudents] = useState<Student[]>(initialStudents);
-  const [log, setLog] = useState<string[]>([]);
 
-  const addLog = (entry: string) => {
-    setLog(prevLog => [...prevLog, entry]);
+  const handleAddStudent = (name: string, status: 'Checked In' | 'Checked Out', imageUrl: string) => {
+    const id = Math.max(...students.map(student => student.id)) + 1;
+    const newStudent: Student = { id, name, status, time: new Date().toLocaleTimeString(), imageUrl };
+    setStudents([...students, newStudent]);
   };
 
   const toggleStatus = (id: number) => {
-    setStudents(students.map(student => 
-      student.id === id ? { ...student, status: student.status === 'Checked In' ? 'Checked Out' : 'Checked In' } : student
+    setStudents(students.map(student =>
+      student.id === id
+        ? { ...student, status: student.status === 'Checked In' ? 'Checked Out' : 'Checked In', time: new Date().toLocaleTimeString() }
+        : student
     ));
-    const student = students.find(student => student.id === id);
-    if (student) {
-      addLog(`${student.name} checked ${student.status === 'Checked In' ? 'Checked Out' : 'Checked In'} at ${new Date().toLocaleTimeString()}`);
-    }
   };
 
   const updateStudentImage = (id: number, imageUrl: string) => {
     setStudents(students.map(student =>
-      student.id === id ? { ...student, imageUrl } : student
+      student.id === id
+        ? { ...student, imageUrl }
+        : student
     ));
   };
 
-  const handleAddStudent = (name: string, status: string, imageUrl: string) => {
-    const id = Math.max(...students.map(student => student.id)) + 1;
-    const newStudent: Student = { id, name, status: status as 'Checked In' | 'Checked Out', time: new Date().toLocaleTimeString(), imageUrl };
-    setStudents([...students, newStudent]);
-  };
+  const checkedInStudents = students.filter(student => student.status === 'Checked In');
 
   return (
     <div className="App">
-      <WaffleMenu onAddStudent={handleAddStudent} />
-      <h1>Student Check-In/Out</h1>
-      <StudentList students={students} toggleStatus={toggleStatus} updateStudentImage={updateStudentImage} />
-      <div>
-        <h2>Activity Log</h2>
-        <ul>
-        {log.map((entry, index) => (
-            <li key={index}>{entry}</li>
+      <div className="sidebar">
+        <h2>Checked In Students</h2>
+        <ul className="student-list">
+          {checkedInStudents.map(student => (
+            <li key={student.id} className="student-item">
+              <div className={`student-box ${student.status === 'Checked In' ? 'checked-in' : 'checked-out'}`}>
+                <img src={student.imageUrl} alt={student.name} className="student-image" />
+                <span>{student.name}</span>
+              </div>
+            </li>
           ))}
         </ul>
+      </div>
+      <div className="main-content">
+        <h1>Student Check-In/Out</h1>
+        <WaffleMenu onAddStudent={handleAddStudent} />
+        <StudentList students={students} toggleStatus={toggleStatus} updateStudentImage={updateStudentImage} />
       </div>
     </div>
   );
 };
 
 export default App;
-         
