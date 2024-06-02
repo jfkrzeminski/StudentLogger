@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AddStudentModal from './AddStudentModal';
+import AddStudentModal from './AddStudentModal/AddStudentModal';
 
 interface WaffleMenuProps {
   onAddStudent: (name: string, status: 'Checked In' | 'Checked Out', imageUrl: string) => void;

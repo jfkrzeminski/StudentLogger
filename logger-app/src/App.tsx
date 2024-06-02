@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import WaffleMenu from './components/WaffleMenu';
-import StudentList from './components/StudentList';
+import StudentList from './components/StudentList/StudentList';
 import { Student } from './types';
 import './App.css';
 
@@ -46,7 +46,7 @@ const App: React.FC = () => {
           {checkedOutStudents.map(student => (
             <li key={student.id} className="student-item">
               <div className="student-box checked-out" onClick={() => toggleStatus(student.id)}>
-                <img src={student.imageUrl} alt={student.name} className="student-image" />
+                <img src={student.imageUrl} className="student-image" />
                 <span>{student.name}</span>
               </div>
             </li>
