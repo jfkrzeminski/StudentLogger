@@ -8,11 +8,12 @@ function StudentRoutes(app) {
 
   const findAllStudentsByClass = async (req, res) => {
     const { cid } = req.params;
-    const students = await dao.findAllStudentsByClass(cid);
+    const students = await dao.findAllStudentsByClass(parseInt(cid));
+    console.log(cid, students);
     res.json(students);
   };
 
   app.post("/api/students", createStudent);
-  app.get("/api/:cid/students", findAllStudentsByClass);
+  app.get("/api/students/:cid", findAllStudentsByClass);
 }
 export default StudentRoutes;

@@ -2,6 +2,7 @@
 .checkin-div {
     text-align: center;
     font-family: Arial, sans-serif;
+    height: 100%;
 }
 
 header {
@@ -39,15 +40,17 @@ h2 {
 /* Sidebar for Check Out */
 .checkout-sidebar {
     width: 40%;
-    background-color: #f8f9fa;
+    background-color: hsl(210, 17%, 98%);
     padding: 20px;
     border-right: 1px solid #ddd;
+    margin-top: 30px;
 }
 
 /* Main content */
 .main-content {
-    width: 70%;
+    width: 60%;
     padding: 20px;
+    margin-top: 30px;
 }
 
 /* Checked-in students */

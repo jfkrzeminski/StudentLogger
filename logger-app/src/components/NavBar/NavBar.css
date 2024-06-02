@@ -1,0 +1,24 @@
+ul {
+    display: flex;
+    text-decoration-style: none;
+    list-style: none;
+    padding: 0;
+}
+
+.nav-box {
+    background-color: #bbeefa;
+    position: absolute;
+    width: 100%;
+}
+
+.nav-item {
+    margin-left: 20px;
+}
+
+.nav-item:hover {
+    color: gray!important;
+}
+
+.nav-link {
+    text-decoration: none;
+}
