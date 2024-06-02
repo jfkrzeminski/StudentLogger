@@ -5,5 +5,6 @@ people.json
 tts_audio
 __pycache__/
 *.py[cod]
-*.ds_store
-
+.DS_Store
+.env
+node_modules
