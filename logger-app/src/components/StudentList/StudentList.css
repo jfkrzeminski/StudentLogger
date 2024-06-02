@@ -28,6 +28,8 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
+  align-items: center;
+  justify-content: center;
   display: flex;
   flex-wrap: wrap; /* Allow items to wrap to the next row */
 }
@@ -132,6 +134,8 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
+  align-items: center;
+  justify-content: center;
   display: flex;
   flex-wrap: wrap; /* Allow items to wrap to the next row */
 }
@@ -145,5 +149,6 @@
 }
 
 .checked-out-student-item {
-  margin: 10px 0;
+  margin-left: 10px;
+  margin-bottom: 10px;
 }
