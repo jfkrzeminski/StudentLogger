@@ -7,9 +7,9 @@ import './App.css';
 const App: React.FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
   
-  const handleAddStudent = (name: string, status: "Checked In" | "Checked Out", imageUrl: string) => {
+  const handleAddStudent = (name: string, status: "Checked In" | "Checked Out", location: string, imageUrl: string) => {
     const id = Math.max(...students.map(student => student.id), 0) + 1;
-    const newStudent: Student = { id, name, status, time: new Date().toLocaleTimeString(), imageUrl };
+    const newStudent: Student = { id, name, status,location, time: new Date().toLocaleTimeString(), imageUrl };
     setStudents([...students, newStudent]);
   };
 

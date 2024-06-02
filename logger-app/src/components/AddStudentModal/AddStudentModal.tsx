@@ -3,16 +3,17 @@ import './AddStudentModal.css';
 
 interface AddStudentModalProps {
   onClose: () => void;
-  onSave: (name: string, status: 'Checked In' | 'Checked Out', imageUrl: string) => void;
+  onSave: (name: string, status: 'Checked In' | 'Checked Out', location: string, imageUrl: string) => void;
 }
 
 const AddStudentModal: React.FC<AddStudentModalProps> = ({ onClose, onSave }) => {
   const [name, setName] = useState('');
   const [status, setStatus] = useState<'Checked In' | 'Checked Out'>('Checked In');
+  const [location, setLocation] = useState('');
   const [imageUrl, setImageUrl] = useState('');
 
   const handleSave = () => {
-    onSave(name, status, imageUrl);
+    onSave(name, status, location, imageUrl);
     onClose();
   };
 

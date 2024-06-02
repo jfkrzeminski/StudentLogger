@@ -9,6 +9,7 @@ interface CheckInOutProps {
 const CheckInOut: React.FC<CheckInOutProps> = ({ addStudent, studentNames }) => {
   const [name, setName] = useState<string>('');
   const [status, setStatus] = useState<'Checked In' | 'Checked Out'>('Checked In');
+  const [location, setLocation] = useState<string>('');
   const [imageUrl, setImageUrl] = useState<string>(''); // New state for image URL
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,10 +26,11 @@ const CheckInOut: React.FC<CheckInOutProps> = ({ addStudent, studentNames }) => 
   const handleCheckInOut = () => {
     if (name) {
       const id = Date.now(); // Generate unique ID
-      const newStudent: Student = { id, name, status, time: new Date().toLocaleTimeString(), imageUrl };
+      const newStudent: Student = { id, name, status,location, time: new Date().toLocaleTimeString(), imageUrl };
       addStudent(newStudent);
       setName('');
       setStatus('Checked In'); // Reset to default value
+      setLocation('Classroom'); // Reset to default value
       setImageUrl(''); // Reset image URL
     }
   };
