@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import './StudentList.css';
-import { Student } from '../../types';
+import { Student } from '../../../types';
 
 interface StudentListProps {
   students: Student[];

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Student } from '../../types';
+import { Student } from '../../../types';
 
 interface CheckedInModalProps {
   students: Student[];
