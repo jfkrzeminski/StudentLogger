@@ -36,9 +36,9 @@ h2 {
   display: flex;
 }
 
-/* Sidebar */
-.sidebar {
-  width: 30%;
+/* Sidebar for Check Out */
+.checkout-sidebar {
+  width: 40%;
   background-color: #f8f9fa;
   padding: 20px;
   border-right: 1px solid #ddd;
@@ -58,4 +58,39 @@ h2 {
 /* Checked-out students */
 .checked-out {
   background-color: #f5c6cb; /* Red background for checked-out students */
+}
+
+
+/* Resizable bar*/
+
+.resizable-sidebar {
+  background-color: #f8f9fa;
+  border-right: 1px solid #ddd;
+}
+
+.sidebar {
+  height: 100%;
+  padding: 20px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Resizable sidebar */
+.react-resizable {
+  position: relative;
+  margin-left: auto; /* Align to the right */
+}
+
+/* Resizable handle */
+.react-resizable-handle {
+  position: absolute;
+  right: -12px; /* Adjust handle position to the right */
+  top: 0;
+  bottom: 0;
+  width: 24px;
+  cursor: col-resize;
+  background: transparent;
 }

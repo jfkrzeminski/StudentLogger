@@ -40,17 +40,29 @@ const App: React.FC = () => {
         <WaffleMenu onAddStudent={handleAddStudent} />
         <StudentList students={students} toggleStatus={toggleStatus} updateStudentImage={updateStudentImage} />
       </div>
-      <div className="sidebar">
+      <div className="checkout-sidebar">
         <h2>Checked Out Students</h2>
-        <ul className="student-list">
-          {checkedOutStudents.map(student => (
-            <li key={student.id} className="student-item">
-              <div className="student-box checked-out" onClick={() => toggleStatus(student.id)}>
-                <img src={student.imageUrl} className="student-image" />
-                <span>{student.name}</span>
-              </div>
-            </li>
-          ))}
+        <ul className="checked-out-student-list">
+          {students
+            .filter(student => student.status === 'Checked Out')
+            .map((student, index) => (
+              <li key={student.id} className="checked-out-student-item">
+                <div className={`checked-out-student-box`}>
+                  <div className="checked-out-student-info">
+                    <div className="checked-out-student-image-container">
+                      <img
+                        src={student.imageUrl || 'https://via.placeholder.com/60'}
+                        alt="Student Image"
+                        className="checked-out-student-image"
+                      />
+
+                    </div>
+                    <span>{student.name}</span>
+                  </div>
+                  <button className="check-in-button" onClick={() => toggleStatus(student.id)}>Check In</button>
+                </div>
+              </li>
+            ))}
         </ul>
       </div>
     </div>

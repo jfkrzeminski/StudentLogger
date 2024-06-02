@@ -31,35 +31,40 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
   };
 
   return (
-    <ul className="student-list">
-      {students.map((student, index) => (
-        <li key={student.id} className="student-item">
-          <div className={`student-box ${student.status === 'Checked In' ? 'checked-in' : 'checked-out'}`}>
-            <div className="student-info">
-              <div className="student-image-container">
-                <img
-                  src={student.imageUrl || 'https://via.placeholder.com/60'}
-                  alt="Student Image"
-                  className="student-image"
-                  onClick={() => handleImageClick(index)} // Call handleImageClick on image click
-                />
-                <input
-                  type="file"
-                  accept="image/*"
-                  ref={(el) => fileInputRefs.current[index] = el} // Store reference to file input
-                  style={{ display: 'none' }}
-                  onChange={(e) => handleImageChange(e, student.id)}
-                />
-              </div>
-              <span>{student.name}</span>
-            </div>
-            {student.status === 'Checked In' && (
-              <button className="check-out-button" onClick={() => toggleStatus(student.id)}>Check Out</button>
-            )}
-          </div>
-        </li>
-      ))}
-    </ul>
+    <div className="student-list-container">
+      <div className="checked-in-container">
+        <h3>Checked In</h3>
+        <ul className="student-list">
+          {students
+            .filter(student => student.status === 'Checked In')
+            .map((student, index) => (
+              <li key={student.id} className="student-item">
+                <div className={`student-box checked-in`}>
+                  <div className="student-info">
+                    <div className="student-image-container">
+                      <img
+                        src={student.imageUrl || 'https://via.placeholder.com/60'}
+                        alt="Student Image"
+                        className="student-image"
+                        onClick={() => handleImageClick(index)}
+                      />
+                      <input
+                        type="file"
+                        accept="image/*"
+                        ref={(el) => fileInputRefs.current[index] = el}
+                        style={{ display: 'none' }}
+                        onChange={(e) => handleImageChange(e, student.id)}
+                      />
+                    </div>
+                    <span>{student.name}</span>
+                  </div>
+                  <button className="check-out-button" onClick={() => toggleStatus(student.id)}>Check Out</button>
+                </div>
+              </li>
+            ))}
+        </ul>
+      </div>
+    </div>
   );
 };
 
