@@ -1,0 +1,94 @@
+/* Student Container Requirements */
+.student-list-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.student-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  text-align: center; /* Center text horizontally */
+}
+
+
+.checked-in-container,
+.checked-out-container {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.checked-in-container h3,
+.checked-out-container h3 {
+  margin-bottom: 10px;
+}
+/*Checked Out Student Boxes*/
+.checked-out-student-box {
+    width: 200px;
+    height: 150px; /* Adjusted height to fit all content */
+    padding: 10px;
+    background-color: #f8d7da;
+    border: 2px solid red;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, border-color 0.3s;
+    position: relative;
+    
+  }
+  
+  .checked-out-student-image-container {
+    width: 50px; /* Adjusted width to fill the container */
+    height: 50px; /* Adjusted height to fill the container */
+    overflow: hidden;
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+  }
+  
+  .checked-out-student-image {
+    max-width: 50px; /* Ensure the image doesn't exceed the container */
+    max-height: 100%;
+    border-radius: 50%;
+  }
+  
+  .checked-out-student-list{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next row */
+  }
+  
+  
+  .checked-out-student-info{
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center horizontally */
+      text-align: center; /* Center text horizontally */
+  }
+  
+  .checked-out-student-item {
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+
+.check-out-button,
+.check-in-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.check-out-button:hover,
+.check-in-button:hover {
+  background-color: #0056b3;
+}
