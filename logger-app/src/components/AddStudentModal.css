@@ -56,11 +56,13 @@
     background-color: #007bff;
     color: white;
     border: none;
+    position: relative;
   }
   
   .button-group button:last-child {
     background-color: #dc3545;
     color: white;
     border: none;
+    position: relative;
   }
   

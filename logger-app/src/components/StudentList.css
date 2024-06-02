@@ -29,11 +29,13 @@
   .student-box.checked-in {
     background-color: #d4edda;
     border-color: #28a745;
+    color: black; /* Color of the text */
   }
   
   .student-box.checked-out {
     background-color: #f8d7da;
     border-color: #dc3545;
+    color : black; /* Color of the text */
   }
   
   .student-image {
