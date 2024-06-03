@@ -36,15 +36,17 @@
 
 .student-item {
   width: 225px; /* Fixed width for each item */
+  height: 250px;
   margin: 10px;
 }
 
 .student-box {
-  height: 150px; /* Adjusted height to fit all content */
+  display: grid;
+  width: 100%;
+  height: 100%;
   padding: 10px;
   border: 2px solid #ccc;
   border-radius: 10px;
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -55,6 +57,8 @@
 .student-box.checked-in {
   background-color: #d4edda;
   border-color: #28a745;
+  grid-template-columns: 125px 100px; /* Adjusted column widths */
+  grid-template-rows: auto auto; /* Adjusted row heights */
   color: black; /* Color of the text */
 }
 
@@ -79,7 +83,18 @@
   border-radius: 50%;
 }
 
-.check-out-button,
+.check-out-button{
+  grid-area: 1 / 2 / span 1 / span 2;
+  height: 100%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
 .check-in-button {
   background-color: #007bff;
   color: white;
@@ -89,6 +104,8 @@
   cursor: pointer;
   margin-top: 10px;
 }
+
+
 
 .check-out-button:hover,
 .check-in-button:hover {
