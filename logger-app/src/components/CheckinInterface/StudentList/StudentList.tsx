@@ -4,7 +4,7 @@ import { Student } from '../../../types';
 
 interface StudentListProps {
   students: Student[];
-  toggleStatus: (id: number) => void;
+  toggleStatus: (id: string) => void;
   updateStudentImage: (id: number, imageUrl: string) => void;
 }
 
@@ -58,7 +58,7 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
                     </div>
                     <span>{student.name}</span>
                   </div>
-                  <button className="check-out-button" onClick={() => toggleStatus(student.id)}>Check Out</button>
+                  <button className="check-out-button" onClick={() => toggleStatus(student._id)}>Check Out</button>
                 </div>
               </li>
             ))}

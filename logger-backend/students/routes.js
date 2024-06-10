@@ -13,7 +13,28 @@ function StudentRoutes(app) {
     res.json(students);
   };
 
+  const updateStudent = async (req, res) => {
+    const { sid } = req.params;
+    const resp = await dao.updateStudent(sid, req.body);
+    res.json(resp);
+  }
+
+  const checkoutStudent = async (req, res) => {
+    const { sid } = req.params;
+    const resp = await dao.checkoutStudent(sid);
+    res.json(resp);
+  }
+
+  const checkinStudent = async (req, res) => {
+    const { sid } = req.params;
+    const resp = await dao.checkinStudent(sid);
+    res.json(resp);
+  }
+
   app.post("/api/students", createStudent);
-  app.get("/api/students/:cid", findAllStudentsByClass);
+  app.put("/api/students/:sid", updateStudent);
+  app.get("/api/classes/:cid", findAllStudentsByClass);
+  app.get("/api/students/:sid/co", checkoutStudent);
+  app.get("/api/students/:sid/ci", checkinStudent);
 }
 export default StudentRoutes;

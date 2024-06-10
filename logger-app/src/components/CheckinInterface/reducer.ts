@@ -6,7 +6,7 @@ const initialState = {
 
 
 const studentsSlice = createSlice({
-  name: "quizzes",
+  name: "students",
   initialState,
   reducers: {
     setStudents: (state, action) => {
