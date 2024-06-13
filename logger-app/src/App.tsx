@@ -6,6 +6,7 @@ import NavBar from './components/NavBar/NavBar';
 import store from './store';
 import './App.css';
 import CheckinInterface from './components/CheckinInterface/CheckinInterface';
+import HallMonitorInterface from './components';
 
 const App: React.FC = () => {
   return (
@@ -14,9 +15,8 @@ const App: React.FC = () => {
         <NavBar />
         <Routes>
           <Route path="/"         element={<Navigate to="/1101"/>}/>
-          <Route path='/:classId' element={<CheckinInterface/>} />
-          <Route path='/'         element={<Navigate to="/HallMonitor"/>}/>
-          <Route path='/:classId' element={<Navigate to="/HallMonitor"/>}/>
+          <Route path='/:classId' element={<CheckinInterface />} />
+          <Route path='/HallMonitor' element={<HallMonitorInterface />}/>
         </Routes>
       </Provider>
     </HashRouter>
