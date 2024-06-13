@@ -40,7 +40,7 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
             .map((student, index) => (
               <li key={student.id} className="student-item">
                 <div className={`student-box checked-in`}>
-                  <div className="student-info">
+                  <div className = "student-name">{student.name}
                     <div className="student-image-container">
                       <img
                         src={student.imageUrl || 'https://via.placeholder.com/60'}
@@ -55,9 +55,8 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
                         style={{ display: 'none' }}
                         onChange={(e) => handleImageChange(e, student.id)}
                       />
+                      </div>
                     </div>
-                    <span>{student.name}</span>
-                  </div>
                   <button className="check-out-button" onClick={() => toggleStatus(student._id)}>Check Out</button>
                 </div>
               </li>
