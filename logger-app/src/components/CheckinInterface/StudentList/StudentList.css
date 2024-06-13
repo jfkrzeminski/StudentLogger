@@ -3,13 +3,6 @@
   justify-content: space-between;
 }
 
-.student-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center horizontally */
-  text-align: center; /* Center text horizontally */
-}
-
 
 .checked-in-container,
 .checked-out-container {
@@ -22,7 +15,7 @@
   margin-bottom: 10px;
 }
 
-/* Student Icon Formatting */
+
 
 .student-list {
   list-style-type: none;
@@ -34,45 +27,45 @@
   flex-wrap: wrap; /* Allow items to wrap to the next row */
 }
 
-.student-item {
-  width: 225px; /* Fixed width for each item */
-  height: 250px;
-  margin: 10px;
-}
-
+/* Student Icons */
 .student-box {
   display: grid;
-  width: 100%;
-  height: 100%;
-  padding: 10px;
   border: 2px solid #ccc;
   border-radius: 10px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   transition: background-color 0.3s, border-color 0.3s;
   position: relative;
 }
 
+/* Student Icon - Checked In */
 .student-box.checked-in {
+  width: 225px;
+  height: 180px;
   background-color: #d4edda;
   border-color: #28a745;
-  grid-template-columns: 125px 100px; /* Adjusted column widths */
-  grid-template-rows: auto auto; /* Adjusted row heights */
+  grid-template-columns: 3fr 2fr; /* Adjusted column widths */
+  grid-template-rows: repeat(6, 30px); /* Adjusted row heights */
   color: black; /* Color of the text */
 }
 
-.student-box.checked-out {
-  background-color: #f8d7da;
-  border-color: #dc3545;
-  color: black; /* Color of the text */
+/* Student Name */
+.student-name{
+  grid-column: 1;
+  grid-row: 1 / 4;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
 }
 
+/* Student Image */
 .student-image-container {
-  width: 50px; /* Adjusted width to fill the container */
-  height: 50px; /* Adjusted height to fill the container */
   overflow: hidden;
-  display: flex; /* Use flexbox */
+  display: grid; /* Use flexbox */
+  grid-column: 1;
+  grid-row: 4 / 7;
+  width: 100px;
   justify-content: center; /* Center horizontally */
   align-items: center; /* Center vertically */
 }
@@ -83,13 +76,28 @@
   border-radius: 50%;
 }
 
+
+
+
+
+
+
+.student-box.checked-out {
+  background-color: #f8d7da;
+  border-color: #dc3545;
+  color: black; /* Color of the text */
+}
+
+
+
+
+
 .check-out-button{
-  grid-area: 1 / 2 / span 1 / span 2;
-  height: 100%;
+  grid-column: 2;
+  grid-row: 1 / 5;
   background-color: #007bff;
   color: white;
   border: none;
-  padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
   margin-top: 10px;
