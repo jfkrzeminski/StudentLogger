@@ -6,7 +6,7 @@ import NavBar from './components/NavBar/NavBar';
 import store from './store';
 import './App.css';
 import CheckinInterface from './components/CheckinInterface/CheckinInterface';
-import HallMonitorInterface from './components';
+import HallMonitorInterface from './components/HallMonitorInterface/HallMonitorInterface';
 
 const App: React.FC = () => {
   return (
