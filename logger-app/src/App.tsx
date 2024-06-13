@@ -15,6 +15,8 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/"         element={<Navigate to="/1101"/>}/>
           <Route path='/:classId' element={<CheckinInterface/>} />
+          <Route path='/'         element={<Navigate to="/HallMonitor"/>}/>
+          <Route path='/:classId' element={<Navigate to="/HallMonitor"/>}/>
         </Routes>
       </Provider>
     </HashRouter>
