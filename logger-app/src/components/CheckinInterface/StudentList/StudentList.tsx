@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useState } from 'react';
 import './StudentList.css';
 import { Student } from '../../../types';
 
@@ -10,6 +11,9 @@ interface StudentListProps {
 
 const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updateStudentImage }) => {
   const fileInputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   const handleImageClick = (id: number) => {
     const fileInput = fileInputRefs.current[id];
@@ -60,12 +64,16 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
                       </div>
                   <button className="check-out-button" onClick={() => toggleStatus(student._id)}>Check Out</button>
                   <div className="pass-dropdown">
-                    <button className="pass-dropdown-button">...</button>
-                    <div className="pass-dropdown-content">
-                      <button className="pass-dropdown-item" onClick={() => toggleStatus(student._id)}>Nurse</button>
-                      <button className="pass-dropdown-item" onClick={() => toggleStatus(student._id)}>Office</button>
-                      <button className="pass-dropdown-item" onClick={() => toggleStatus(student._id)}>Locker</button>
-                    </div>
+                    {/* Step 4: Attach toggle to button */}
+                    <button className="pass-dropdown-button" onClick={toggleDropdown}>...</button>
+                    {/* Step 3: Conditional rendering */}
+                    {isDropdownOpen && (
+                      <div className="pass-dropdown-content">
+                        <button className="pass-dropdown-item" onClick={() => toggleStatus(student._id)}>Nurse</button>
+                        <button className="pass-dropdown-item" onClick={() => toggleStatus(student._id)}>Office</button>
+                        <button className="pass-dropdown-item" onClick={() => toggleStatus(student._id)}>Locker</button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </li>
