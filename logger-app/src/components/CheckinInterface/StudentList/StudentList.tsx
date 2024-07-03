@@ -104,7 +104,8 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
                   </div>
                 </div>
               </li>
-            ))}
+            ))
+          }
         </ul>
       </div>
     </div>
