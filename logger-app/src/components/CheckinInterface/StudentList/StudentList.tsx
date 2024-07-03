@@ -19,14 +19,23 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
   // useState hook to manage the dropdown menu's open/close state
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  // Function to toggle the dropdown menu's visibility
-  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+  // Change useState initialization to track the open dropdown by student _id
+  const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
 
   // Function to programmatically click the file input when the image is clicked
   const handleImageClick = (id: number) => {
     const fileInput = fileInputRefs.current[id];
     if (fileInput) {
       fileInput.click();
+    }
+  };
+
+  // Modify the toggleDropdown function to accept a student's _id
+  const toggleDropdown = (id: string) => {
+    if (openDropdownId === id) {
+      setOpenDropdownId(null); // Close the dropdown if it's already open
+    } else {
+      setOpenDropdownId(id); // Open the dropdown for the clicked student
     }
   };
 
@@ -51,7 +60,7 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
       <div className="checked-in-container">
         <h3>Checked In</h3>
         {/* List of students who are checked in */}
-        <ul className="student-list">
+          <ul className="student-list">
           {students
             .filter(student => student.status === 'Checked In') // Filter to only include students who are checked in
             .map((student, index) => (
@@ -82,9 +91,9 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
                   {/* Dropdown for additional actions */}
                   <div className="pass-dropdown">
                     {/* Button to toggle dropdown */}
-                    <button className="pass-dropdown-button" onClick={toggleDropdown}>...</button>
-                    {/* Dropdown content, shown if dropdown is open */}
-                    {isDropdownOpen && (
+                    <button className="pass-dropdown-button" onClick={() => toggleDropdown(student._id)}>...</button>
+                    {/* Dropdown content, shown if dropdown is open for the current student */}
+                    {openDropdownId === student._id && (
                       <div className="pass-dropdown-content">
                         {/* Options within the dropdown */}
                         <button className="pass-dropdown-item" onClick={() => toggleStatus(student._id)}>Nurse</button>
