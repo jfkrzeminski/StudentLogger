@@ -17,10 +17,16 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
   // useRef hook to manage references to the file input elements
   const fileInputRefs = useRef<(HTMLInputElement | null)[]>([]);
   // useState hook to manage the dropdown menu's open/close state
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
 
   // Function to toggle the dropdown menu's visibility
-  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+  const toggleDropdown = (id: string) => {
+    if (openDropdownId === id) {
+      setOpenDropdownId(null); // Close the dropdown if it's already open
+    } else {
+      setOpenDropdownId(id); // Open the dropdown for the clicked student
+    }
+  };
 
   // Function to programmatically click the file input when the image is clicked
   const handleImageClick = (id: number) => {
@@ -47,52 +53,40 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
   // Render the component
   return (
     <div className="student-list-container">
-      {/* Container for the list of checked-in students */}
       <div className="checked-in-container">
         <h3>Checked In</h3>
-        {/* List of students who are checked in */}
         <ul className="student-list">
           {students
-            .filter(student => student.status === 'Checked In') // Filter to only include students who are checked in
+            .filter(student => student.status === 'Checked In')
             .map((student, index) => (
               <li key={student.id} className="student-item">
-                {/* Individual student item */}
                 <div className={`student-box checked-in`}>
-                  {/* Display student's name */}
                   <div className="student-name">{student.name}</div>
-                  {/* Container for student's image */}
                   <div className="student-image-container">
                     <img
-                      src={student.imageUrl || 'https://via.placeholder.com/60'} // Use student's image or a placeholder
+                      src={student.imageUrl || 'https://via.placeholder.com/60'}
                       alt="Student Image"
                       className="student-image"
-                      onClick={() => handleImageClick(index)} // On click, trigger file input for image change
+                      onClick={() => handleImageClick(index)}
                     />
-                    {/* Hidden file input for image upload */}
                     <input
                       type="file"
                       accept="image/*"
-                      ref={(el) => fileInputRefs.current[index] = el} // Reference to manipulate file input
+                      ref={(el) => fileInputRefs.current[index] = el}
                       style={{ display: 'none' }}
-                      onChange={(e) => handleImageChange(e, student.id)} // Handle image change
+                      onChange={(event) => handleImageChange(event, student.id)}
                     />
                   </div>
-                  {/* Button to check out the student */}
-                  <button className="check-out-button" onClick={() => toggleStatus(student._id)}>Check Out</button>
-                  {/* Dropdown for additional actions */}
-                  <div className="pass-dropdown">
-                    {/* Button to toggle dropdown */}
-                    <button className="pass-dropdown-button" onClick={toggleDropdown}>...</button>
-                    {/* Dropdown content, shown if dropdown is open */}
-                    {isDropdownOpen && (
-                      <div className="pass-dropdown-content">
-                        {/* Options within the dropdown */}
-                        <button className="pass-dropdown-item" onClick={() => toggleStatus(student._id)}>Nurse</button>
-                        <button className="pass-dropdown-item" onClick={() => toggleStatus(student._id)}>Office</button>
-                        <button className="pass-dropdown-item" onClick={() => toggleStatus(student._id)}>Locker</button>
-                      </div>
-                    )}
-                  </div>
+                  <button className="pass-dropdown-button" onClick={() => toggleDropdown(student.id.toString())}>
+                    Dropdown
+                  </button>
+                  {openDropdownId === student.id.toString() && (
+                    <div className="pass-dropdown-content show">
+                      <a href="#">Action 1</a>
+                      <a href="#">Action 2</a>
+                      <a href="#">Action 3</a>
+                    </div>
+                  )}
                 </div>
               </li>
             ))}
@@ -101,6 +95,5 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
     </div>
   );
 };
-
 // Export the StudentList component for use in other parts of the application
 export default StudentList;
