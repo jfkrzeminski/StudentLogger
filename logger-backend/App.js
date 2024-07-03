@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import cors from "cors";
 import session from "express-session";
 import StudentRoutes from './students/routes.js';
+import PassesRoutes from './passes/routes.js';
 import "dotenv/config";
 
 // const CONNECTION_STRING = 'mongodb://127.0.0.1:27017/kanbas'
@@ -30,5 +31,6 @@ if (process.env.NODE_ENV !== "development") {
 app.use(session(sessionOptions));
 app.use(express.json());
 StudentRoutes(app);
+PassesRoutes(app);
 
 app.listen(process.env.PORT || 4000);

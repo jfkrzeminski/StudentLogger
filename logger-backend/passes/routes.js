@@ -1,11 +1,17 @@
 import * as dao from "./dao.js";
 
 function PassesRoutes(app) {
-  const createStudent = async (req, res) => {
-    const stud = await dao.createStudent(req.body);
-    res.json(stud);
+  const createPass = async (req, res) => {
+    const pass = await dao.createPass(req.body);
+    res.json(pass);
   };
 
-  app.post("/api/students", createStudent);
+  const deletePass = async (req, res) => {
+    const status = await dao.deletePassById(req.params.pid);
+    res.json(status);
+  }
+
+  app.post("/api/passes", createPass);
+  app.delete("/api/passes/:pid", deletePass);
 }
 export default PassesRoutes;
