@@ -1,20 +1,28 @@
+// Import React hooks and CSS for styling
 import React, { useRef } from 'react';
 import { useState } from 'react';
 import './StudentList.css';
+// Import the Student type definition
 import { Student } from '../../../types';
 
+// Define the props for the StudentList component
 interface StudentListProps {
-  students: Student[];
-  toggleStatus: (id: string) => void;
-  updateStudentImage: (id: number, imageUrl: string) => void;
+  students: Student[]; // Array of student objects
+  toggleStatus: (id: string) => void; // Function to toggle the check-in status of a student
+  updateStudentImage: (id: number, imageUrl: string) => void; // Function to update a student's image
 }
 
+// The StudentList component definition
 const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updateStudentImage }) => {
+  // useRef hook to manage references to the file input elements
   const fileInputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  // useState hook to manage the dropdown menu's open/close state
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  // Function to toggle the dropdown menu's visibility
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
+  // Function to programmatically click the file input when the image is clicked
   const handleImageClick = (id: number) => {
     const fileInput = fileInputRefs.current[id];
     if (fileInput) {
@@ -22,6 +30,8 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
     }
   };
 
+  // Function to handle the file input change event
+  // It reads the selected file and updates the student's image URL
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>, id: number) => {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
@@ -34,41 +44,49 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
     }
   };
 
-  
-
+  // Render the component
   return (
     <div className="student-list-container">
+      {/* Container for the list of checked-in students */}
       <div className="checked-in-container">
         <h3>Checked In</h3>
+        {/* List of students who are checked in */}
         <ul className="student-list">
           {students
-            .filter(student => student.status === 'Checked In')
+            .filter(student => student.status === 'Checked In') // Filter to only include students who are checked in
             .map((student, index) => (
               <li key={student.id} className="student-item">
+                {/* Individual student item */}
                 <div className={`student-box checked-in`}>
-                  <div className = "student-name">{student.name}</div>
-                    <div className="student-image-container">
-                      <img
-                        src={student.imageUrl || 'https://via.placeholder.com/60'}
-                        alt="Student Image"
-                        className="student-image"
-                        onClick={() => handleImageClick(index)}
-                      />
-                      <input
-                        type="file"
-                        accept="image/*"
-                        ref={(el) => fileInputRefs.current[index] = el}
-                        style={{ display: 'none' }}
-                        onChange={(e) => handleImageChange(e, student.id)}
-                      />
-                      </div>
+                  {/* Display student's name */}
+                  <div className="student-name">{student.name}</div>
+                  {/* Container for student's image */}
+                  <div className="student-image-container">
+                    <img
+                      src={student.imageUrl || 'https://via.placeholder.com/60'} // Use student's image or a placeholder
+                      alt="Student Image"
+                      className="student-image"
+                      onClick={() => handleImageClick(index)} // On click, trigger file input for image change
+                    />
+                    {/* Hidden file input for image upload */}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      ref={(el) => fileInputRefs.current[index] = el} // Reference to manipulate file input
+                      style={{ display: 'none' }}
+                      onChange={(e) => handleImageChange(e, student.id)} // Handle image change
+                    />
+                  </div>
+                  {/* Button to check out the student */}
                   <button className="check-out-button" onClick={() => toggleStatus(student._id)}>Check Out</button>
+                  {/* Dropdown for additional actions */}
                   <div className="pass-dropdown">
-                    {/* Step 4: Attach toggle to button */}
+                    {/* Button to toggle dropdown */}
                     <button className="pass-dropdown-button" onClick={toggleDropdown}>...</button>
-                    {/* Step 3: Conditional rendering */}
+                    {/* Dropdown content, shown if dropdown is open */}
                     {isDropdownOpen && (
                       <div className="pass-dropdown-content">
+                        {/* Options within the dropdown */}
                         <button className="pass-dropdown-item" onClick={() => toggleStatus(student._id)}>Nurse</button>
                         <button className="pass-dropdown-item" onClick={() => toggleStatus(student._id)}>Office</button>
                         <button className="pass-dropdown-item" onClick={() => toggleStatus(student._id)}>Locker</button>
@@ -84,4 +102,5 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
   );
 };
 
+// Export the StudentList component for use in other parts of the application
 export default StudentList;
