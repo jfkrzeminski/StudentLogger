@@ -30,6 +30,11 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
     }
   };
 
+  //Function to control the checkout functionality when a student is checked out
+  const handleCheckOut = (id: string) => {
+    toggleStatus(id); // Call the toggleStatus function to check out the student
+  }
+
   // Modify the toggleDropdown function to accept a student's _id
   const toggleDropdown = (id: string) => {
     if (openDropdownId === id) {
@@ -87,7 +92,7 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
                     />
                   </div>
                   {/* Button to check out the student */}
-                  <button className="check-out-button" onClick={() => toggleStatus(student._id)}>Check Out</button>
+                  <button className="check-out-button" onClick={() => handleCheckOut(student._id)}>Check Out</button>
                   {/* Dropdown for additional actions */}
                   <div className="pass-dropdown">
                     {/* Button to toggle dropdown */}
@@ -96,9 +101,9 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
                     {openDropdownId === student._id && (
                       <div className="pass-dropdown-content">
                         {/* Options within the dropdown */}
-                        <button className="pass-dropdown-item" onClick={() => toggleStatus(student._id)}>Nurse</button>
-                        <button className="pass-dropdown-item" onClick={() => toggleStatus(student._id)}>Office</button>
-                        <button className="pass-dropdown-item" onClick={() => toggleStatus(student._id)}>Locker</button>
+                        <button className="pass-dropdown-item" onClick={() => handleCheckOut(student._id)}>Nurse</button>
+                        <button className="pass-dropdown-item" onClick={() => handleCheckOut(student._id)}>Office</button>
+                        <button className="pass-dropdown-item" onClick={() => handleCheckOut(student._id)}>Locker</button>
                       </div>
                     )}
                   </div>

@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "react-resizable": "^3.0.5"
+    "react-resizable": "^3.0.5",
+    "react-timer-hook": "^3.0.7"
   }
 }
