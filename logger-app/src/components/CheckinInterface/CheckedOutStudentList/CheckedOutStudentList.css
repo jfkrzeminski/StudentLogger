@@ -24,18 +24,18 @@
 }
 /*Checked Out Student Boxes*/
 .checked-out-student-box {
-    width: 200px;
-    height: 150px; /* Adjusted height to fit all content */
-    padding: 10px;
-    background-color: #f8d7da;
-    border: 2px solid red;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s, border-color 0.3s;
-    position: relative;
+  width: 200px;
+  height: 150px; /* Adjusted height to fit all content */
+  padding: 10px;
+  background-color: #f8d7da;
+  border: 2px solid red;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s, border-color 0.3s;
+  position: relative;
 }
 .nurse-location {
   background-color: #f8d7da;

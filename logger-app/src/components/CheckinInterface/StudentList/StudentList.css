@@ -44,14 +44,14 @@
   border-color: #28a745;
   grid-template-columns: 3fr 2fr; /* Adjusted column widths */
   grid-template-rows: repeat(6, 30px); /* Adjusted row heights */
-  color: black; /* Color of the text */
+  color: black; /* Color of the text */ 
 }
 
 /* Student Name */
 .student-name{
   grid-column: 1;
   grid-row: 1 / 4;
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: bold;
   display: flex;
   justify-content: center;
@@ -78,22 +78,6 @@
   width: 75px;
   border-radius: 50%;
 }
-
-
-
-
-
-
-
-.student-box.checked-out {
-  background-color: #f8d7da;
-  border-color: #dc3545;
-  color: black; /* Color of the text */
-}
-
-
-
-
 
 .check-out-button{
   grid-column: 2;

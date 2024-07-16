@@ -92,7 +92,7 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
                     />
                   </div>
                   {/* Button to check out the student */}
-                  <button className="check-out-button" onClick={() => handleCheckOut(student._id, "bathroom")}>Check Out</button>
+                  <button className="check-out-button" onClick={() => handleCheckOut(student._id, "bathroom")}>Bathroom Request</button>
                   {/* Dropdown for additional actions */}
                   <div className="pass-dropdown">
                     {/* Button to toggle dropdown */}
