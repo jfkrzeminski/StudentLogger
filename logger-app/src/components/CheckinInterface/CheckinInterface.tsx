@@ -9,6 +9,7 @@ import CheckedOutStudentList from './CheckedOutStudentList/CheckedOutStudentList
 import * as client from "./client";
 import { setStudents, addStudent } from './reducer';
 import { ClassState } from '../../store';
+import { StringLiteral } from 'typescript';
 
 const CheckinInterface: React.FC = () => {
   const { classId } = useParams();
@@ -31,18 +32,11 @@ const CheckinInterface: React.FC = () => {
   //   setStudents([...students, newStudent]);
   // };
 
-  const toggleStatus = (id: number) => {
-    setStudents(students.map(student =>
-      student.id === id
-        ? { ...student, status: student.status === 'Checked In' ? 'Checked Out' : 'Checked In', time: new Date().toLocaleTimeString() }
-        : student
-    ));
-  };
-
-  const toggleStudent = (id: string) => {
+  const toggleStudent = (id: string, location: string) => {
     let newTime = new Date().toLocaleTimeString();
     let newStudent = students.filter(stud => stud._id === id)[0];
-    newStudent = { ...newStudent, status: newStudent.status === 'Checked In' ? 'Checked Out' : 'Checked In', time: newTime};
+    let newLocation = location;
+    newStudent = { ...newStudent, status: newStudent.status === 'Checked In' ? 'Checked Out' : 'Checked In', time: newTime, location: newLocation};
     client.setStudent(id, newStudent).then((status) => {
       dispatch(setStudents(
         students.map(student =>

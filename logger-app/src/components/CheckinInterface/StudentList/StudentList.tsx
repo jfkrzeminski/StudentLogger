@@ -8,7 +8,7 @@ import { Student } from '../../../types';
 // Define the props for the StudentList component
 interface StudentListProps {
   students: Student[]; // Array of student objects
-  toggleStatus: (id: string) => void; // Function to toggle the check-in status of a student
+  toggleStatus: (id: string, location:string) => void; // Function to toggle the check-in status of a student
   updateStudentImage: (id: number, imageUrl: string) => void; // Function to update a student's image
 }
 
@@ -31,8 +31,8 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
   };
 
   //Function to control the checkout functionality when a student is checked out
-  const handleCheckOut = (id: string) => {
-    toggleStatus(id); // Call the toggleStatus function to check out the student
+  const handleCheckOut = (id: string, location:string) => {
+    toggleStatus(id,location); // Call the toggleStatus function to check out the student
   }
 
   // Modify the toggleDropdown function to accept a student's _id
@@ -92,7 +92,7 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
                     />
                   </div>
                   {/* Button to check out the student */}
-                  <button className="check-out-button" onClick={() => handleCheckOut(student._id)}>Check Out</button>
+                  <button className="check-out-button" onClick={() => handleCheckOut(student._id, "bathroom")}>Check Out</button>
                   {/* Dropdown for additional actions */}
                   <div className="pass-dropdown">
                     {/* Button to toggle dropdown */}
@@ -101,9 +101,9 @@ const StudentList: React.FC<StudentListProps> = ({ students, toggleStatus, updat
                     {openDropdownId === student._id && (
                       <div className="pass-dropdown-content">
                         {/* Options within the dropdown */}
-                        <button className="pass-dropdown-item" onClick={() => handleCheckOut(student._id)}>Nurse</button>
-                        <button className="pass-dropdown-item" onClick={() => handleCheckOut(student._id)}>Office</button>
-                        <button className="pass-dropdown-item" onClick={() => handleCheckOut(student._id)}>Locker</button>
+                        <button className="pass-dropdown-item" onClick={() => handleCheckOut(student._id, "nurse")}>Nurse</button>
+                        <button className="pass-dropdown-item" onClick={() => handleCheckOut(student._id, "office")}>Office</button>
+                        <button className="pass-dropdown-item" onClick={() => handleCheckOut(student._id, "locker")}>Locker</button>
                       </div>
                     )}
                   </div>

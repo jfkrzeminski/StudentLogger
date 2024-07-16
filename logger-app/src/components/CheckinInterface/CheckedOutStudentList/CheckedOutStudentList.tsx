@@ -5,14 +5,14 @@ import { Student } from '../../../types';
 
 interface CheckedOutStudentListProps {
   students: Student[];
-  toggleStatus: (id: string, newImageUrl?: string) => void; // Updated to potentially accept a new image URL
+  toggleStatus: (id: string, location:string ) => void; // Updated to potentially accept a new image URL
 }
 
 const CheckedOutStudentList: React.FC<CheckedOutStudentListProps> = ({ students, toggleStatus }) => {
   const fileInputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const handleCheckIn = (id: string) => {
-    toggleStatus(id);
+    toggleStatus(id, "classroom");
   };
 
   return (
