@@ -22,7 +22,7 @@ const CheckedOutStudentList: React.FC<CheckedOutStudentListProps> = ({ students,
         <ul className="student-list">
           {students.filter(student => student.status === 'Checked Out').map((student, index) => (
             <li key={student.id} className="student-item">
-              <div className="checked-out-student-box">
+              <div className={`checked-out-student-box ${student.location === 'nurse' ? 'nurse-location' : student.location === 'bathroom' ? 'bathroom-location' : student.location === 'office' ? 'office-location': student.location === 'locker' ? 'locker-location' : ''}`}>
                 <div className="checked-out-student-info">
                   <div className="checked-out-student-image-container" onClick={() => fileInputRefs.current[index]?.click()}>
                     <img
